@@ -34,9 +34,7 @@ public class UserController {
      */
     @RequestMapping(path = "/login",method = RequestMethod.POST)
     public ResponseEntity<CustomResponse> login(@RequestBody User userSubmit) {
-        CustomResponse response = userService.login(userSubmit);
-        boolean isCheck = (boolean) response.getData();
-        return new ResponseEntity<CustomResponse>(userService.login(userSubmit),HttpStatus.OK);
+        return new ResponseEntity<>(userService.login(userSubmit),HttpStatus.OK);
     }
 
     /*
@@ -51,8 +49,10 @@ public class UserController {
         String message = (backCode == 1) ? "注册成功" : "账号名已存在，请重新注册";
         int code = (backCode == 1) ? 210 : 110;
         boolean data = (backCode == 1);
-        return new ResponseEntity<CustomResponse>(new CustomResponse(message,code,data) , HttpStatus.OK);
+        return new ResponseEntity<>(new CustomResponse(message,code,data) , HttpStatus.OK);
     }
+
+
 
 
     @RequestMapping("/test")

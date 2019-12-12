@@ -38,7 +38,8 @@ public class UserServiceImpl implements UserService {
         boolean isChecked = (!(userData == null) && user.getLoginPassword().equals(userData.getLoginPassword()));
         String message = isChecked ? "登录成功" : "登录失败，检查账号或密码";
         int code = isChecked ? 200 : 100;
-        return new CustomResponse(message,code,isChecked);
+        int uid = user.getLoginId();
+        return new CustomResponse(message,code,uid);
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Meeting {
     private int meetingId;
+    private String meetingDescription;
     private String meetingName;
     private int sponsorId;
     private String beginTime;
@@ -20,5 +21,11 @@ public class Meeting {
     private String meetingHosts;
     private String meetingHotel;
     private boolean isPass;
-    private String infoCollector;
+    private boolean name;
+    private boolean number;
+    private boolean gender;
+    private boolean org;
+    private boolean fullId;
+    private boolean pTime;
+    private boolean needRoom;
 }

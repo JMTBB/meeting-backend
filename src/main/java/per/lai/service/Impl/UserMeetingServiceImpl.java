@@ -15,7 +15,7 @@ public class UserMeetingServiceImpl implements UserMeetingService {
 
     @Override
     public int addEntity(UserMeeting userMeeting) {
-        return 0;
+        return userMeetingMapper.addEntity(userMeeting);
     }
 
     @Override

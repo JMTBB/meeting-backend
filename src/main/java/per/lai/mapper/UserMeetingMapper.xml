@@ -5,8 +5,8 @@
 
 <mapper namespace="per.lai.mapper.UserMeetingMapper">
     <insert id="addEntity" parameterType="UserMeeting">
-        insert into meetings.participation(pMeetingId, pLoginId, pInfo)
-        value (#{pMeetingId},#{pLoginId},#{pInfo})
+        insert into meetings.participation(pMeetingId, pLoginId, name, number, gender, org, fullId, needRoom, pTime)
+        value (#{pMeetingId},#{pLoginId},#{name},#{number},#{gender},#{org},#{fullId},#{needRoom},#{pTime})
     </insert>
     <delete id="deleteEntityByPrimaryKey" parameterType="int">
         delete from meetings.participation
