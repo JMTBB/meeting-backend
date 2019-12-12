@@ -14,8 +14,8 @@ public class Meeting {
     private int meetingId;
     private String meetingName;
     private int sponsorId;
-    private Date beginTime;
-    private Date endTime;
+    private String beginTime;
+    private String endTime;
     private String meetingLocation;
     private String meetingHosts;
     private String meetingHotel;

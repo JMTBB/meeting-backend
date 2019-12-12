@@ -5,8 +5,8 @@
 
 <mapper namespace="per.lai.mapper.MeetingMapper">
     <insert id="addMeeting" parameterType="Meeting">
-        insert into meetings.meeting(meetingId, meetingName, sponsorId, beginTime, endTime, meetingHosts, meetLocation, meetingHotel, infoCollector, isPass)
-        value (#{meetingId},#{meetingName},#{sponsorId},#{beginTime},#{endTime},#{meetingHosts},#{meetingLocation},#{meetingHotel},#{infoCollector}, #{isPass})
+        insert into meetings.meeting(meetingName, sponsorId, beginTime, endTime, meetingHosts, meetLocation, meetingHotel, infoCollector, isPass)
+        value (#{meetingName},#{sponsorId},#{beginTime},#{endTime},#{meetingHosts},#{meetingLocation},#{meetingHotel},#{infoCollector}, #{isPass})
     </insert>
     <delete id="deleteMeetingById" parameterType="int">
         delete from meetings.meeting
