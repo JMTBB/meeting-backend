@@ -13,8 +13,11 @@
         insert into meetings.login (loginid, loginpassword, loginname, isadmin)
         value(#{loginId}, #{loginPassword}, #{loginName}, true )
     </insert>
-    <select id="getUserById" parameterType="int">
+    <select id="getUserById" parameterType="int" resultType="User">
         select * from meetings.login where loginid = #{loginId}
+    </select>
+    <select id="getAllUser" resultType="User">
+        select * from meetings.login
     </select>
 </mapper>
 

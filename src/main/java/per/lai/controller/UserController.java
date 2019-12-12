@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import per.lai.pojo.CustomResponse;
 import per.lai.pojo.User;
 import per.lai.service.UserService;
 
@@ -24,28 +25,35 @@ public class UserController {
     }
 
 
-    @RequestMapping(path = "/user/{id}/{name}/{password}", method = RequestMethod.POST)
-    public int register(@PathVariable("id") int loginId, @PathVariable("name") String loginName, @PathVariable("password") String loginPassword) {
+    /*
+        登录接口
+        状态码
+            code：   200登录成功
+                    100登录失败
 
-        return userService.addUser(new User(loginId, loginPassword, loginName,false));
-
+     */
+    @RequestMapping(path = "/login",method = RequestMethod.POST)
+    public ResponseEntity<CustomResponse> login(@RequestBody User userSubmit) {
+        CustomResponse response = userService.login(userSubmit);
+        boolean isCheck = (boolean) response.getData();
+        return new ResponseEntity<CustomResponse>(userService.login(userSubmit),HttpStatus.OK);
     }
 
-
-
+    /*
+        注册接口：
+        code：
+            210 注册成功
+            110 注册失败 重复id
+     */
     @RequestMapping(path = "/user", method = RequestMethod.POST)
-    public ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder) {
-        System.out.println("Creating user..." + user.getLoginName());
-        if (userService.isAccountExist(user)) {
-            System.out.println("An account with id" + user.getLoginId() + " is already exist.");
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-        }
-        userService.addUser(user);
-
-
-        return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-
+    public ResponseEntity<CustomResponse> addUser(@RequestBody User user) {
+        int backCode =  userService.addUser(user);
+        String message = (backCode == 1) ? "注册成功" : "账号名已存在，请重新注册";
+        int code = (backCode == 1) ? 210 : 110;
+        boolean data = (backCode == 1);
+        return new ResponseEntity<CustomResponse>(new CustomResponse(message,code,data) , HttpStatus.OK);
     }
+
 
     @RequestMapping("/test")
     public String test() throws JsonProcessingException {
