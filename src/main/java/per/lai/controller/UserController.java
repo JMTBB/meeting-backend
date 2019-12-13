@@ -46,7 +46,7 @@ public class UserController {
     @RequestMapping(path = "/user", method = RequestMethod.POST)
     public ResponseEntity<CustomResponse> addUser(@RequestBody User user) {
         int backCode =  userService.addUser(user);
-        String message = (backCode == 1) ? "注册成功" : "账号名已存在，请重新注册";
+        String message = (backCode == 1) ? "注册成功，请登录" : "账号名已存在，请重新注册";
         int code = (backCode == 1) ? 210 : 110;
         boolean data = (backCode == 1);
         return new ResponseEntity<>(new CustomResponse(message,code,data) , HttpStatus.OK);

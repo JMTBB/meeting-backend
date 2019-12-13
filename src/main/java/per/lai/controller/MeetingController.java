@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import per.lai.pojo.CustomResponse;
 import per.lai.pojo.Meeting;
 import per.lai.service.MeetingService;
@@ -55,6 +52,21 @@ public class MeetingController {
         boolean result = !(meetings.size() == 0);
         int code = result ? 230 : 130;
         String message = result ? "获取成功" : "列表为空";
+        return new ResponseEntity<>(new CustomResponse(message, code, meetings), HttpStatus.OK);
+    }
+    /*
+    * 根据ID获取会议列表
+    * 状态码
+    *   code
+    *       231 成功
+    *       131 失败
+    * */
+    @RequestMapping(path = "/meeting/{id}", method = RequestMethod.GET)
+    public ResponseEntity<CustomResponse> getMeetingBySponsorId(@PathVariable("id") int id) {
+        List<Meeting> meetings = meetingService.getMeetingBySponsorId(id);
+        boolean result = !(meetings.size() == 0);
+        int code = result ? 231 : 131;
+        String message = result ? "获取成功" : "获取列表失败";
         return new ResponseEntity<>(new CustomResponse(message, code, meetings), HttpStatus.OK);
     }
 }
