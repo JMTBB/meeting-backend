@@ -26,4 +26,7 @@
     <select id="getAllMeeting" resultType="Meeting">
         select * from meetings.meeting
     </select>
+    <select id="getMeetingPass" resultType="Meeting">
+        select * from meetings.meeting where sponsorId != #{sponsorId} and isPass = true;
+    </select>
 </mapper>

@@ -13,5 +13,6 @@ public interface UserService {
     boolean isAccountExist(User user);
 
     List<User> getAllUser();
+
     CustomResponse login(User user);
 }

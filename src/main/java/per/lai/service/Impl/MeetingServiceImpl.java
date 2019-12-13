@@ -21,6 +21,11 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
+    public List<Meeting> getMeetingPass(int sponsorId) {
+        return meetingMapper.getMeetingPass(sponsorId);
+    }
+
+    @Override
     public List<Meeting> getAllMeeting() {
         return meetingMapper.getAllMeeting();
     }

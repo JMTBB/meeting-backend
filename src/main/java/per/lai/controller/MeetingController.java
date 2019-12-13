@@ -66,7 +66,16 @@ public class MeetingController {
         List<Meeting> meetings = meetingService.getMeetingBySponsorId(id);
         boolean result = !(meetings.size() == 0);
         int code = result ? 231 : 131;
-        String message = result ? "获取成功" : "获取列表失败";
+        String message = result ? "获取成功" : "会议列表为空";
         return new ResponseEntity<>(new CustomResponse(message, code, meetings), HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/passing/{id}", method = RequestMethod.GET)
+    public ResponseEntity<CustomResponse> getMeetingPass(@PathVariable int id) {
+        List<Meeting> meetings = meetingService.getMeetingPass(id);
+        boolean result = !(meetings.size() == 0);
+        int code = result ? 232 : 132;
+        String message = result ? "获取成功" : "可参加列表为空";
+        return new ResponseEntity<>(new CustomResponse(message, code, meetings),HttpStatus.OK);
     }
 }
