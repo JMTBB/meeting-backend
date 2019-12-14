@@ -26,6 +26,6 @@ public class Meeting {
     private boolean gender;
     private boolean org;
     private boolean fullId;
-    private boolean pTime;
+    private boolean ptime;
     private boolean needRoom;
 }

@@ -69,7 +69,14 @@ public class MeetingController {
         String message = result ? "获取成功" : "会议列表为空";
         return new ResponseEntity<>(new CustomResponse(message, code, meetings), HttpStatus.OK);
     }
-
+    /*
+    * 根据ID获取可参加列表
+    * 状态码
+    *   code
+    *       232 成功
+    *       132 失败
+    *
+    * */
     @RequestMapping(path = "/passing/{id}", method = RequestMethod.GET)
     public ResponseEntity<CustomResponse> getMeetingPass(@PathVariable int id) {
         List<Meeting> meetings = meetingService.getMeetingPass(id);
