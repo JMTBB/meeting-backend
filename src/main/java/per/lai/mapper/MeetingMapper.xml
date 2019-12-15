@@ -11,6 +11,7 @@
     <delete id="deleteMeetingById" parameterType="int">
         delete from meetings.meeting
         where meetingId = #{meetingId}
+
     </delete>
     <update id="checkMeetingById" parameterType="int">
         update meetings.meeting
@@ -28,5 +29,25 @@
     </select>
     <select id="getMeetingPass" resultType="Meeting">
         select * from meetings.meeting where sponsorId != #{sponsorId} and isPass = true;
+    </select>
+
+    <select id="getJoinableMeetingByUserId" parameterType="int" resultType="Meeting">
+        select * from meetings.meeting
+        where isPass = true
+            and meetingId not in (
+                select pMeetingId from meetings.participation
+                where pLoginId = #{sponsorId}
+            )
+    </select>
+
+    <select id="getJoinedMeetingByUserId" parameterType="int" resultType="Meeting">
+        select * from meetings.meeting
+        where meetingId in (
+            select pMeetingId from meetings.participation
+            where pLoginId = #{sponsorId}
+            )
+    </select>
+    <select id="getMeetingByMeetingId" parameterType="int" resultType="Meeting">
+        select * from meetings.meeting where meetingId = #{meetingId}
     </select>
 </mapper>

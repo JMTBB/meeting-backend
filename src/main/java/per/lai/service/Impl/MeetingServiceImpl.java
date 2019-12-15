@@ -22,7 +22,12 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     public List<Meeting> getMeetingPass(int sponsorId) {
-        return meetingMapper.getMeetingPass(sponsorId);
+        return meetingMapper.getJoinableMeetingByUserId(sponsorId);
+    }
+
+    @Override
+    public List<Meeting> getJoinedMeetingByUserId(int sponsorId) {
+        return meetingMapper.getJoinedMeetingByUserId(sponsorId);
     }
 
     @Override
@@ -33,6 +38,11 @@ public class MeetingServiceImpl implements MeetingService {
     @Override
     public int addMeeting(Meeting meeting) {
         return meetingMapper.addMeeting(meeting);
+    }
+
+    @Override
+    public Meeting getMeetingByMeetingId(int meetingId) {
+        return meetingMapper.getMeetingByMeetingId(meetingId);
     }
 
     @Override

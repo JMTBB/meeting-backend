@@ -5,6 +5,8 @@ import per.lai.mapper.UserMeetingMapper;
 import per.lai.pojo.UserMeeting;
 import per.lai.service.UserMeetingService;
 
+import java.util.List;
+
 public class UserMeetingServiceImpl implements UserMeetingService {
     private UserMeetingMapper userMeetingMapper;
 
@@ -20,6 +22,11 @@ public class UserMeetingServiceImpl implements UserMeetingService {
 
     @Override
     public int deleteEntityByPrimaryKey(int pMeetingId, int pLoginId) {
-        return 0;
+        return userMeetingMapper.deleteEntityByPrimaryKey(pMeetingId, pLoginId);
+    }
+
+    @Override
+    public List<UserMeeting> getPartInfoByMeetingId(int meetingId) {
+        return userMeetingMapper.getPartInfoByMeetingId(meetingId);
     }
 }

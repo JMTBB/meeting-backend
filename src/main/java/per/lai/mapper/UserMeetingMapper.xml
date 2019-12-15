@@ -12,4 +12,9 @@
         delete from meetings.participation
         where pMeetingId = #{pMeetingId} and pLoginId = #{pLoginId}
     </delete>
+
+    <select id="getPartInfoByMeetingId" parameterType="int" resultType="UserMeeting">
+        select * from meetings.participation
+        where pMeetingId = #{meetingId}
+    </select>
 </mapper>

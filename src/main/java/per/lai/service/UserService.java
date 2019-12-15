@@ -1,8 +1,11 @@
 package per.lai.service;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import per.lai.pojo.CustomResponse;
 import per.lai.pojo.User;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface UserService {
@@ -15,4 +18,5 @@ public interface UserService {
     List<User> getAllUser();
 
     CustomResponse login(User user);
+    XSSFWorkbook exportExcelInfo() throws ClassNotFoundException, InvocationTargetException, IntrospectionException, IllegalAccessException;
 }

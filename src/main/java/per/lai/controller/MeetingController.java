@@ -70,12 +70,42 @@ public class MeetingController {
         return new ResponseEntity<>(new CustomResponse(message, code, meetings), HttpStatus.OK);
     }
     /*
+    * 审核会议
+    *   code
+    *       234 成功
+    *       134 失败
+    * */
+    @RequestMapping(path = "/meeting/{meetingId}", method = RequestMethod.PUT)
+    public ResponseEntity<CustomResponse> checkMeet(@PathVariable("meetingId") int meetingId) {
+        int result = meetingService.checkMeetingById(meetingId);
+        int code = result == 1 ? 234 : 134;
+        String message = result == 1 ? "通过成功" : "通过失败";
+        return new ResponseEntity<>(new CustomResponse(message, code, result),HttpStatus.OK);
+    }
+    /*
+     * 删除会议
+     *   code
+     *       235 成功
+     *       135 失败
+     * */
+    @RequestMapping(path = "/meeting/{meetingId}", method = RequestMethod.DELETE)
+    public ResponseEntity<CustomResponse> deleteMeetingById(@PathVariable("meetingId") int meetingId) {
+        int result = meetingService.deleteMeetingById(meetingId);
+        int code = result == 1 ? 235 : 135;
+        String message = result == 1 ? "删除成功" : "删除失败";
+        return new ResponseEntity<>(new CustomResponse(message, code, result),HttpStatus.OK);
+    }
+
+
+    /*
     * 根据ID获取可参加列表
     * 状态码
     *   code
     *       232 成功
-    *       132 失败
-    *
+    *       132 失败/空
+    * mapper接口更改
+    * getMeetingPass ====> getJoinableMeeting
+    * 获取可参加列表应该将已参加的会议去除
     * */
     @RequestMapping(path = "/passing/{id}", method = RequestMethod.GET)
     public ResponseEntity<CustomResponse> getMeetingPass(@PathVariable int id) {
@@ -84,5 +114,33 @@ public class MeetingController {
         int code = result ? 232 : 132;
         String message = result ? "获取成功" : "可参加列表为空";
         return new ResponseEntity<>(new CustomResponse(message, code, meetings),HttpStatus.OK);
+    }
+
+
+    /*
+    * 更具ID获取已经参加的列表
+    * 状态码
+    *   code
+    *       233 成功
+    *       133 失败/空
+    *
+    *
+    * */
+    @RequestMapping(path = "/joined/{id}", method = RequestMethod.GET)
+    public ResponseEntity<CustomResponse> getJoinedMeeting(@PathVariable int id) {
+        List<Meeting> meetings = meetingService.getJoinedMeetingByUserId(id);
+        boolean result = !(meetings.size() == 0);
+        int code = result ? 233 : 133;
+        String message = result ? "获取成功" : "没有已参加的会议";
+        return new ResponseEntity<>(new CustomResponse(message, code, meetings),HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/singleMeeting/{meetingId}", method = RequestMethod.GET)
+    public ResponseEntity<CustomResponse> getMeetingByMeetingId(@PathVariable int meetingId){
+        Meeting meeting = meetingService.getMeetingByMeetingId(meetingId);
+        boolean result = meeting != null;
+        int code = result ? 236 : 136;
+        String message = result ? "获取对应会议成功" : "获取失败";
+        return new ResponseEntity<>(new CustomResponse(message,code,meeting),HttpStatus.OK);
     }
 }
