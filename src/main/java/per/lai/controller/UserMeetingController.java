@@ -21,12 +21,12 @@ public class UserMeetingController {
 
 
     /*
-    * 参加会议接口
-    *   code
-    *       240 参加成功
-    *       141 参加失败
-    *
-    * */
+     * 参加会议接口
+     *   code
+     *       240 参加成功
+     *       141 参加失败
+     *
+     * */
     @RequestMapping(path = "/userMeeting", method = RequestMethod.POST)
     public ResponseEntity<CustomResponse> addJoinEntry(@RequestBody UserMeeting userMeeting) {
         int backCode = userMeetingService.addEntity(userMeeting);
@@ -43,6 +43,6 @@ public class UserMeetingController {
         boolean result = !(list.size() == 0);
         int code = result ? 241 : 141;
         String message = result ? "获取成功" : "没有人参加此会议";
-        return new ResponseEntity<>(new CustomResponse(message, code, list),HttpStatus.OK);
+        return new ResponseEntity<>(new CustomResponse(message, code, list), HttpStatus.OK);
     }
 }

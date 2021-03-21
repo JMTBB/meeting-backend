@@ -30,9 +30,9 @@ public class TestController {
     @RequestMapping(path = "/construct", produces = "application/json;charset=UTF-8")
     public String Test() throws JsonProcessingException {
         String message = "信息测试";
-        User user = new User(123456, "loginPassword", "loginName",false);
+        User user = new User(123456, "loginPassword", "loginName", false);
         int code = 12;
-        CustomResponse customResponse = new CustomResponse(message,code,user);
+        CustomResponse customResponse = new CustomResponse(message, code, user);
 
         return new ObjectMapper().writeValueAsString(customResponse);
     }
@@ -40,9 +40,9 @@ public class TestController {
     @RequestMapping(path = "/logintest", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
     public String login(@RequestBody User userGet) throws JsonProcessingException {
         String message = "登录测试";
-        User user = new User(123456, "loginPassword", "loginName",false);
+        User user = new User(123456, "loginPassword", "loginName", false);
         int code = 12;
-        CustomResponse customResponse = new CustomResponse(message,code,userGet);
+        CustomResponse customResponse = new CustomResponse(message, code, userGet);
         System.out.println("testStart");
         System.out.println(userGet.toString());
         System.out.println("testEnd");
@@ -53,9 +53,9 @@ public class TestController {
     @RequestMapping(path = "/login2")
     public ResponseEntity<CustomResponse> login2() {
         String message = "ResponseEntity登录测试";
-        User user = new User(88888, "loginIng", "loginName",false);
+        User user = new User(88888, "loginIng", "loginName", false);
         int code = 12;
-        CustomResponse customResponse = new CustomResponse(message,code,user);
+        CustomResponse customResponse = new CustomResponse(message, code, user);
         return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.OK);
     }
 

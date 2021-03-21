@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="per.lai.mapper.UserMeetingMapper">
+    <insert id="addEntity" parameterType="UserMeeting">
+        insert into meetings.participation(pMeetingId, pLoginId, name, number, gender, org, fullId, needRoom, pTime)
+        value (#{pMeetingId},#{pLoginId},#{name},#{number},#{gender},#{org},#{fullId},#{needRoom},#{ptime})
+    </insert>
+    <delete id="deleteEntityByPrimaryKey" parameterType="int">
+        delete from meetings.participation
+        where pMeetingId = #{pMeetingId} and pLoginId = #{pLoginId}
+    </delete>
+
+    <select id="getPartInfoByMeetingId" parameterType="int" resultType="UserMeeting">
+        select * from meetings.participation
+        where pMeetingId = #{meetingId}
+    </select>
+</mapper>

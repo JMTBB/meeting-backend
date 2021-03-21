@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public int addUser(User user) {
-        if(isAccountExist(user)) {
+        if (isAccountExist(user)) {
             return 0;
         }
         return userMapper.addUser(user);
@@ -46,12 +46,12 @@ public class UserServiceImpl implements UserService {
         boolean isChecked = (!(userData == null) && user.getLoginPassword().equals(userData.getLoginPassword()));
         String message = isChecked ? "登录成功" : "登录失败，检查账号或密码";
         int code = isChecked ? 200 : 100;
-        if(isChecked) {
+        if (isChecked) {
             //如果为管理员 返回特殊状态码
             code = userData.isAdmin() ? 201 : 200;
         }
         int uid = user.getLoginId();
-        return new CustomResponse(message,code,uid);
+        return new CustomResponse(message, code, uid);
     }
 
     @Override
@@ -65,11 +65,11 @@ public class UserServiceImpl implements UserService {
         List<ExcelBean> excel = new ArrayList<>();
         Map<Integer, List<ExcelBean>> map = new LinkedHashMap<>();
         XSSFWorkbook xssfWorkbook = null;
-        excel.add(new ExcelBean("账号","loginId", 0));
-        excel.add(new ExcelBean("密码","loginPassword", 0));
-        excel.add(new ExcelBean("用户名","loginName", 0));
-        excel.add(new ExcelBean("管理员","isAdmin", 0));
-        map.put(0,excel);
+        excel.add(new ExcelBean("账号", "loginId", 0));
+        excel.add(new ExcelBean("密码", "loginPassword", 0));
+        excel.add(new ExcelBean("用户名", "loginName", 0));
+        excel.add(new ExcelBean("管理员", "isAdmin", 0));
+        map.put(0, excel);
         String sheetName = "用户信息";
         xssfWorkbook = ExcelUtil.createExcelFile(User.class, userList, map, sheetName);
         return xssfWorkbook;

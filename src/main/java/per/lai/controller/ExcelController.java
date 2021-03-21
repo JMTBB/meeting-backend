@@ -25,7 +25,8 @@ public class ExcelController {
     }
 
     @RequestMapping("/userExcel")
-    public @ResponseBody void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public @ResponseBody
+    void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.reset();
 //        Map<String,Object> map=new HashMap<String,Object>();
 //        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
@@ -58,12 +59,9 @@ public class ExcelController {
             bos.flush();
             workbook.write(bos);
             bos.close();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
 
 
     }
